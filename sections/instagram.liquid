@@ -1,0 +1,268 @@
+
+{% if section.settings.enable_overlay %}
+{% assign section_overlay = 'dt-sc-overlay' %}
+{% endif %}
+{% case section.settings.background_style %}
+{% when 'default' %}
+{% when 'parallax' %}
+{%- assign background_style = 'data-speed="2"' %}
+{% when 'fixed' %}
+{%- assign background_style = 'data-speed="1"' %}
+{% endcase %} 
+{% if section.settings.show_background_image %}
+{% assign lazyScript = "lazyload" %}
+{% endif %}
+<div class="dt-sc-section-wrapper {{lazyScript}} {{section_overlay}} {% if section.settings.background_style == 'parallax' %} parallax-initiated{% endif %}" style="{% render 'bg-color-image-padding' %}" {{background_style}} {% include 'bg_image' %}>  
+  <div class="{% render 'container-settings' %}"> 
+    <div class="row {{ section.settings.custom_class_name }} dt-sc-column three-fourth-one-fourth">
+     
+      {% if section.settings.html != blank %}
+      <div class="dt-sc-divider">                 
+        {{section.settings.html}}        
+      </div>
+      {% endif %}
+       {% if section.settings.section_heading != blank or section.settings.section_sub_heading != blank or   section.settings.section_description != blank or section.settings.section_button_link != blank %}
+      <div class="dt-sc-heading {% if settings.title_image_enable != blank %} {{settings.title_image_position | escape}} {% endif %} {{ section.settings.heading_position | escape}}">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2500 2500" style="enable-background:new 0 0 2500 2500;" xml:space="preserve">
+          <style type="text/css">
+            .st0{clip-path:url(#SVGID_2_);fill:#231F20;}
+          </style>
+          <g>
+            <defs>
+              <rect id="SVGID_1_" width="2500" height="2500"></rect>
+            </defs>
+            <clipPath id="SVGID_2_">
+              <use xlink:href="#SVGID_1_" style="overflow:visible;"></use>
+            </clipPath>
+            <path class="st0" d="M2207.9,1055.8h-217.3c15.8,61.4,25.2,125.7,25.2,192c0,424.2-343.8,768-767.9,768
+                                 c-424.1,0-767.9-343.8-767.9-768c0-66.4,9.4-130.6,25.2-192H287.9v1056c0,52.9,43,95.9,96.1,95.9h1727.7c53,0,96-42.9,96.1-95.9
+                                 l0,0V1055.8z M2207.9,383.9c0-53-43-96-96.1-96c0,0,0,0,0,0h-287.9c-53,0-96,43-96,96v288c0,53,43,96,96,96c0,0,0,0,0,0h287.9
+                                 c53,0,96.1-42.9,96.1-96c0,0,0,0,0,0V383.9z M1247.9,767.9c-265.1,0-480,214.8-480,479.9c0,265,214.9,480,480,480s480-215,480-480
+                                 C1727.9,982.7,1513,767.9,1247.9,767.9 M2207.9,2495.7H287.9c-159,0-287.9-129-287.9-288.1V287.9C0,128.9,128.9,0,287.9,0h1919.9
+                                 c159,0,287.9,128.9,287.9,287.9v1919.7C2495.7,2366.8,2366.9,2495.7,2207.9,2495.7"></path>
+          </g>
+        </svg>
+        {% if section.settings.section_heading != blank %}
+        <h6 class="dt-sc-main-heading">{{section.settings.section_heading}}</h6>
+        {% endif %}
+        {% if section.settings.section_sub_heading != blank %}
+        <h6 class="dt-sc-sub-heading">{{section.settings.section_sub_heading}}</h6>
+        {% endif %}
+        {% if section.settings.section_description != blank %}
+        <p class="dt-sc-heading-description">{{section.settings.section_description}}</p>
+        {% endif %}
+        {% if section.settings.section_button_link != blank  and section.settings.section_button_text != blank %}
+        <a href="{{section.settings.section_button_link}}" class="dt-sc-btn">{{section.settings.section_button_text}}</a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<style type="text/css">
+  
+  #shopify-section-{{section.id}}.home-html-text .dt-sc-heading {display: flex;flex-direction: column;justify-content: center;align-items: center;}
+  #shopify-section-{{section.id}}.home-html-text .dt-sc-heading .dt-sc-main-heading { color: var(--DTColor_Heading); color:{{ section.settings.section_heading_color }}; margin-top:10px; } 
+  #shopify-section-{{section.id}}.home-html-text .dt-sc-heading .dt-sc-sub-heading { color: var(--DTColor_Heading); color:{{ section.settings.section_sub_heading_color }};font-family:var(--DTFontTypo_Body);font-weight:100; margin:0;} 
+  #shopify-section-{{section.id}}.home-html-text .dt-sc-heading .dt-sc-heading-description { color: var(--DTColor_Body); color:{{ section.settings.section_description_color }}; } 
+  #shopify-section-{{section.id}}.home-html-text .dt-sc-heading .dt-sc-btn { 
+    background: var(--DT_Button_BG_Color); background:{{ section.settings.section_button_bg_color }}; 
+      color: var(--DT_Button_Text_Color); color:{{ section.settings.section_button_text_color }}; }
+  #shopify-section-{{section.id}}.home-html-text .dt-sc-heading .dt-sc-btn:hover { 
+    background: var(--DT_Button_BG_Hover_Color); background:{{ section.settings.section_button_hover_bg_color }}; 
+      color: var(--DT_Button_Text_Hover_Color); color:{{ section.settings.section_button_hover_text_color }}; }
+  #shopify-section-{{section.id}}.home-html-text .dt-sc-overlay:before  { 
+    color: var(--DTTertiaryColor); 
+      color: {{ section.settings.background_color }};    
+      background: currentcolor; 
+      opacity: {{ section.settings.overlay_transparency }}; }
+  #insta-feed .instafeed-overlay::after, .instafeed-shopify .instafeed-overlay::after {background-color: #A87C36;}
+</style>
+{% schema %}
+{
+"name": "Instagram",
+"class": "index-section home-html-text",
+"settings": [
+{
+"type": "checkbox",
+"id": "full",
+"label": "Show Full width"
+},
+{
+"type": "checkbox",
+"id": "spacing_both_ends",
+"label": "Enable Right & Left Spacing (Works only on Fullwidth)",
+"default": false
+},
+{
+"type": "text",
+"id": "padding",
+"label": "Style value (Padding)",
+"default":"0,0",
+"info":"Top(px),Bottom(px)"
+},
+{
+"type": "text",
+"id": "margin",
+"label": "Style value (Margin)",
+"default":"0,0",
+"info":"Top(px),Bottom(px)"
+},
+{
+"type": "checkbox",
+"id": "show_background_image",
+"label": "Enable Background image"
+},
+{
+"type": "image_picker",
+"id": "background_image",
+"label": "Background image",
+"info": "Size: 1920x1280"
+},
+{
+"type": "select",
+"id": "background_style",
+"label": "Background Style",
+"default": "default",
+"options": [
+{
+"value": "default",
+"label": "Default"
+},
+{
+"value": "parallax",
+"label": "Parallax"
+},
+{
+"value": "fixed",
+"label": "Fixed"
+}
+]
+},
+{
+"type": "checkbox",
+"id": "enable_overlay",
+"label": "Enable Background Color (Used as Background Image Overlay Color too)"
+},
+{
+"type": "color",
+"id": "background_color",
+"label":"Background color"
+},
+{
+"type": "text",
+"id": "overlay_transparency",
+"label": "Overlay Transparency (0.01 to 1)",
+"default": "0.5"
+},
+{
+"type": "text",
+"id": "section_heading",
+"label": "Main Heading",
+"default": "Html Text"
+},  
+{
+"type": "text",
+"id": "section_sub_heading",
+"label": "Sub Heading",
+"default": "Sub Heading"
+},  
+{
+"type": "text",
+"id": "section_description",
+"label": "Description",
+"default": "Use this text to share the information which you like!."
+},  
+{
+"type": "text",
+"id": "section_button_text",
+"label": "Link text"
+},
+{
+"type": "url",
+"id": "section_button_link",
+"label": "Link URL"
+},
+{
+"type": "header",
+"content": "Section Color settings"
+},
+{
+"type": "color",
+"id": "section_heading_color",
+"label": "Heading color"
+},    
+{
+"type": "color",
+"id": "section_sub_heading_color",
+"label": "Sub heading color"
+},   
+{
+"type": "color",
+"id": "section_description_color",
+"label": "Description color"
+},  
+{
+"type": "color",
+"id": "section_button_bg_color",
+"label": "Button bg color"
+},   
+{
+"type": "color",
+"id": "section_button_text_color",
+"label": "Button text color"
+},   
+{
+"type": "color",
+"id": "section_button_hover_bg_color",
+"label": "Button hover bg color"
+},   
+{
+"type": "color",
+"id": "section_button_hover_text_color",
+"label": "Button hover text color"
+},
+{
+"type": "select",
+"id": "heading_position",
+"label": "Heading Position",
+"options": [
+{
+"value": "text-center",
+"label": "Center"
+},
+{
+"value": "text-start",
+"label": "Left"
+},
+{
+"value": "text-end",
+"label": "Right"
+}
+]
+},
+{
+"type": "html",
+"id": "html",
+"label": "Add your HTML text here",
+"default": "<!--<div id='insta-feed'></div>-->"
+},
+{
+"type": "header",
+"content": "Custom class"
+},
+{
+"type": "text",
+"id": "custom_class_name",
+"label": "Add your custom class name here"
+}
+],
+
+"presets": [
+{
+"name": "Instagram",
+"category": "Text"
+}
+]
+}
+{% endschema %}  
